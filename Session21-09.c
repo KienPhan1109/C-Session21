@@ -57,21 +57,15 @@ int inputBooks(){
 }
 
 void saveFile(int n){
-    FILE *f = fopen("FIle/books.txt", "a");
-    for (int i = 0; i < n; i++)
-    {
-        fprintf(f, "%d %s %s %d %s\n", book[i].id_book, book[i].name_book, book[i].author_book, book[i].price_book, book[i].type_book);
-    }
+    FILE *f = fopen("File/books.bin", "wb");
+    fwrite(book, sizeof(struct books), n, f);
     printf("Lưu thông tin sách thành công\n");
     fclose(f);
 }
 
 void readFile(int n){
-    FILE *f = fopen("File/books.txt", "r");
-    for (int i = 0; i < n; i++)
-    {
-        fscanf(f, "%d %s %s %d %s\n", &book[i].id_book, book[i].name_book, book[i].author_book, &book[i].price_book, book[i].type_book);
-    }
+    FILE *f = fopen("File/books.bin", "rb");
+    fread(book, sizeof(struct books), n, f);
     printf("Đọc thông tin sách thành công\n");
     fclose(f);
 }
